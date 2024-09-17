@@ -45,7 +45,7 @@
 # *.ipr
 
 # CMake
-cmake-build-*/
+TP-Nro1/cmake-build-debug
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
@@ -116,6 +116,7 @@ fabric.properties
 
 ### CMake ###
 CMakeLists.txt.user
+CMakeLists.txt
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
