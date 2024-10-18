@@ -129,6 +129,9 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+## VSCode config
+.vscode/
+
 ### CMake Patch ###
 # External projects
 *-prefix/
