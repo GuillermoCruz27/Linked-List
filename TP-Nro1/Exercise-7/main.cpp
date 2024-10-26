@@ -11,6 +11,45 @@ using namespace std;
  */
 
 int main() {
-    Menu();
+    TLista lista{};
+    int opcion;
+    float valor;
+    CrearLista(lista);
+    do {
+        MostrarOpciones();
+        cin >> opcion;
+        fflush(stdin);
+        system("cls");
+        switch (opcion) {
+            case 1:
+                cout << "Ingrese un valor(real): ";
+                cin >> valor;
+                InsertarInicio(lista, valor);
+                break;
+            case 2:
+                cout << "Ingrese un valor(real): ";
+                cin >> valor;
+                InsertarFinal(lista, valor);
+                break;
+            case 3:
+                EliminarInicio(lista);
+                break;
+            case 4:
+                EliminarFinal(lista);
+                break;
+            case 5:
+                MostrarLista(lista);
+                break;
+            case 6:
+                cout << "Saliendo..." << endl;
+                LiberarMemoria(lista);
+                break;
+            default:
+                cout << "Opción invalida." << endl;
+                break;
+        }
+        system("pause");
+        system("cls");
+    } while (opcion != 6 && lista.contador <= 30);
     return 0;
 }

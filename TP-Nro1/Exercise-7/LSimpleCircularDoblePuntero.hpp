@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 
 #define endl '\n'
@@ -21,19 +19,19 @@ struct TLista {
     int contador;
 };
 
-inline void CrearLista(TLista &lista) {
+void CrearLista(TLista &lista) {
     lista.inicio = nullptr;
     lista.final = nullptr;
     lista.contador = 0;
 }
 
-inline void CrearNodo(PunteroNodo &nuevo, dato valor) {
+void CrearNodo(PunteroNodo &nuevo, dato valor) {
     nuevo = new Nodo;
     nuevo->info = valor;
     nuevo->sig = nullptr;
 }
 
-inline void InsertarInicio(TLista &lista, dato valor) {
+void InsertarInicio(TLista &lista, dato valor) {
     PunteroNodo nuevo;
     CrearNodo(nuevo, valor);
     if (lista.inicio == nullptr) {
@@ -48,7 +46,7 @@ inline void InsertarInicio(TLista &lista, dato valor) {
     lista.contador++;
 }
 
-inline void InsertarFinal(TLista &lista, dato valor) {
+void InsertarFinal(TLista &lista, dato valor) {
     PunteroNodo nuevo;
     CrearNodo(nuevo, valor);
     if (lista.inicio == nullptr) {
@@ -63,9 +61,13 @@ inline void InsertarFinal(TLista &lista, dato valor) {
     lista.contador++;
 }
 
-inline void EliminarInicio(TLista &lista) {
+void EliminarInicio(TLista &lista) {
     if (lista.inicio == nullptr) {
         cout << "No existe ningun nodo" << endl;
+    } else if (lista.inicio == lista.final) {
+        delete lista.inicio;
+        lista.inicio = nullptr;
+        lista.final = nullptr;
     } else {
         PunteroNodo extraido = lista.inicio;
         lista.inicio = lista.inicio->sig;
@@ -75,9 +77,10 @@ inline void EliminarInicio(TLista &lista) {
     lista.contador--;
 }
 
-inline void EliminarFinal(TLista &lista) {
+void EliminarFinal(TLista &lista) {
     if (lista.inicio == nullptr) {
         cout << "No existe ningun nodo" << endl;
+    } else if (lista.inicio == lista.final) {
     } else {
         PunteroNodo extraido = lista.final;
         PunteroNodo previoExtraido = lista.inicio;
@@ -91,7 +94,7 @@ inline void EliminarFinal(TLista &lista) {
     lista.contador--;
 }
 
-inline void MostrarLista(TLista &lista) {
+void MostrarLista(TLista &lista) {
     if (lista.inicio == nullptr) {
         cout << "La lista esta vacia." << endl;
     } else {
@@ -103,19 +106,13 @@ inline void MostrarLista(TLista &lista) {
     }
 }
 
-inline void LiberarMemoria(TLista &lista) {
-    if (lista.inicio == nullptr) {
-        cout << "No existe ningun nodo" << endl;
-    } else {
-        while (lista.inicio != nullptr) {
-            EliminarInicio(lista);
-        }
-        lista.final = nullptr;
-        lista.contador = 0;
+void LiberarMemoria(TLista &lista) {
+    while (lista.inicio != nullptr) {
+        EliminarInicio(lista);
     }
 }
 
-inline void MostrarOpciones() {
+void MostrarOpciones() {
     cout << "Menu" << endl;
     cout << "1. Insertar al inicio." << endl;
     cout << "2. Insertar al final." << endl;
@@ -124,49 +121,5 @@ inline void MostrarOpciones() {
     cout << "5. Mostrar elementos." << endl;
     cout << "6. Salir." << endl;
     cout << endl;
-    cout << "Ingrese una opcion: ";
-}
-
-inline void Menu() {
-    TLista lista;
-    int opcion;
-    float valor;
-    CrearLista(lista);
-    do {
-        MostrarOpciones();
-        cin >> opcion;
-        fflush(stdin);
-        system("cls");
-        switch (opcion) {
-            case 1:
-                cout << "Ingrese un valor(real): ";
-                cin >> valor;
-                InsertarInicio(lista, valor);
-                break;
-            case 2:
-                cout << "Ingrese un valor(real): ";
-                cin >> valor;
-                InsertarFinal(lista, valor);
-                break;
-            case 3:
-                EliminarInicio(lista);
-                break;
-            case 4:
-                EliminarFinal(lista);
-                break;
-            case 5:
-                MostrarLista(lista);
-                break;
-            case 6:
-                cout << "Saliendo..." << endl;
-                LiberarMemoria(lista);
-                break;
-            default:
-                cout << "Opcion invalida." << endl;
-                break;
-        }
-        system("pause");
-        system("cls");
-    } while (opcion != 6 && lista.contador <= 30);
-
+    cout << "Ingrese una opción: ";
 }
