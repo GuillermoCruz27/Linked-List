@@ -15,13 +15,44 @@ using namespace std;
 * */
 
 int main() {
+    setlocale(LC_ALL, "es_ES.UTF-8");
     TLista lista{};
     CrearLista(lista);
-    InsertarInicio(lista, 8);
-    InsertarInicio(lista, 9);
-    InsertarFinal(lista, 7);
-    EliminarFinal(lista);
-    EliminarFinal(lista);
-    EliminarFinal(lista);
+    int opcion;
+    do
+    {
+        Menu();
+        cout << "Ingrese una opción: ";
+        cin >> opcion;
+        fflush(stdin);
+        system("cls");
+        switch (opcion) {
+        case 1:
+            int valor;
+            cout << "Ingrese un valor: ";
+            cin >> valor;
+            AgregarElemento(lista, valor);
+            break;
+        case 2:
+            MostrarMayor(lista);
+            break;
+        case 3:
+            EliminarInicio(lista);
+            break;
+        case 4:
+            ContarPositivos(lista);
+            break;
+        case 5:
+            cout << "Saliendo..." << endl;
+            LiberarMemoria(lista);
+            break;
+        default:
+            cout << "Opción invalida" << endl;
+            break;
+        }
+        system("pause");
+        system("cls");
+    }
+    while (opcion != 5);
     return 0;
 }

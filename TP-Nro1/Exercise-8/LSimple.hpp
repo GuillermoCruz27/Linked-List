@@ -102,3 +102,69 @@ void LiberarMemoria(TLista &lista) {
         EliminarInicio(lista);
     }
 }
+
+void AgregarElemento(TLista &lista, int dato) {
+    if (lista.inicio == NULL) {
+        InsertarInicio(lista, dato);
+    } else if (lista.contador == 1) {
+        if (dato < lista.inicio -> dato) {
+            InsertarInicio(lista, dato);
+        } else if (dato > lista.inicio -> dato) {
+            InsertarFinal(lista, dato);
+        }
+    } else {
+        PunteroNodo previo = NULL;
+        PunteroNodo actual = lista.inicio;
+
+        while (actual != NULL && dato > actual -> dato) {
+            previo = actual;
+            actual = actual -> sig;
+        }
+
+        if (previo == NULL) {
+            InsertarInicio(lista, dato);
+        } else if (actual == NULL) {
+            InsertarFinal(lista, dato);
+        } else {
+            PunteroNodo nodo;
+            CrearNodo(nodo, dato);
+            previo -> sig = nodo;
+            nodo -> sig = actual;
+            lista.contador++;
+        }
+    }
+}
+
+void MostrarMayor(TLista &lista) {
+    if (lista.inicio == NULL) {
+        cout << "No existe ningún nodo" << endl;
+    } else {
+        PunteroNodo i;
+        for (i = lista.inicio; i -> sig != NULL; i = i -> sig) {}
+        cout << "El mayor de los datos ingresados es: " << i -> dato << endl;
+    }
+}
+
+void ContarPositivos(TLista lista) {
+    if (lista.inicio == NULL) {
+        cout << "No existe ningún nodo" << endl;
+    } else {
+        int contador = 0;
+        for (PunteroNodo i = lista.inicio; i != NULL; i = i -> sig) {
+            if (i -> dato > 0) {
+                contador++;
+            }
+        }
+        cout << "La cantidad de datos positivos ingresados es: " << contador << endl;
+    }
+}
+
+void Menu() {
+    cout << "Menú" << endl;
+    cout << endl;
+    cout << "1. Agregar elemento" << endl;
+    cout << "2. Mostrar el mayor de los datos ingresados" << endl;
+    cout << "3. Eliminar el menor valor de la lista" << endl;
+    cout << "4. Cantidad de datos positivos ingresados" << endl;
+    cout << "5. Salir" << endl;
+}
